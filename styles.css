@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('bg.png'); /* Set the background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CSS styles for the navbar */
+.navbar {
+    position: fixed; /* Fix the navbar position */
+    top: 0; /* Position at the top of the page */
+    left: 0; /* Align to the left edge */
+    width: 100%; /* Take full width of the page */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    z-index: 1000; /* Ensure it's on top of other content */
+}
+
+/* Style for the level */
+.navbar-left {
+    width: 100%; /* Takes up equal space */
+}
+
+/* Style for the HP */
+.navbar-center {
+    width: 100%; /* Takes up equal space */
+}
+
+/* Style for the Money */
+.navbar-right {
+    width: 1200%; /* Adjust width as needed */
+}
+
+
+.grey-box {
+    background-color: rgba(105, 105, 105, 0);
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start; /* Align content to the top */
+    align-items: center;
+    height: 85%; /* Ensure the box takes full height */
+    width: 80%; /* Ensure the box takes full width */
+    color: rgba(255, 218, 9, 0.9);
+}
+
+#console {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column-reverse; /* Stack output messages in reverse order */
+}
+
+#console-output {
+    padding: 10px;
+    background-color: rgba(39, 39, 39, 0.3);
+    border-radius: 10px;
+    height: 75%;
+    overflow-y: auto;
+    color: rgba(255, 218, 9, 0.9);
+}
+
+#console-input {
+    margin-top: 50px; /* Push input area to the bottom */
+    display: flex;
+    align-items: center;
+}
+
+#console-input span {
+    color: rgb(212, 166, 12);
+    margin-right: 5px;
+}
+
+#input-field {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ffc403;
+    border-radius: 3px;
+    outline: none;
+}
