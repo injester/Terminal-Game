@@ -10,26 +10,27 @@
 <!-- Navbar -->
 <div class="navbar">
     <div class="navbar-left">
-        Level: <span id="level"></span> 🔱
+        Level: <span id="level">0</span> 🔱
     </div>
     <div class="navbar-center">
-        HP: <span id="hp"></span> ❤️
+        HP: <span id="hp">100</span> ❤️
     </div>
     <div class="navbar-right">
-        Money: <span id="money"></span> 💲
+        Money: <span id="money">0</span> 💲
     </div>
 </div>
-    <div class="grey-box">
-        <div id="console">
-            <p>Type 'help' for a list of commands.</p>
-            <!-- Console input/output area -->
-            <div id="console-input">
-                <span>&gt;</span>
-                <input type="text" id="input-field" autofocus>
-            </div>
-            <div id="console-output"></div>
+<div class="grey-box">
+    <div id="console">
+        <p>Type 'help' for a list of commands.</p>
+        <!-- Console input/output area -->
+        <div id="console-input">
+            <span>&gt;</span>
+            <input type="text" id="input-field" autofocus>
         </div>
+        <div id="console-output"></div>
     </div>
-    <script src="script.js"></script> <!-- Include your JavaScript file -->
+</div>
+<script type="module" src="script.js"></script> <!-- Include main script -->
+<script type="module" src="monsters.js"></script> <!-- Include monsters script -->
 </body>
 </html>
