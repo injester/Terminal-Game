@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website with Console Game</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS file -->
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar">
+    <div class="navbar-left">
+        Level: <span id="level"></span> 🔱
+    </div>
+    <div class="navbar-center">
+        HP: <span id="hp"></span> ❤️
+    </div>
+    <div class="navbar-right">
+        Money: <span id="money"></span> 💲
+    </div>
+</div>
+    <div class="grey-box">
+        <div id="console">
+            <p>Type 'help' for a list of commands.</p>
+            <!-- Console input/output area -->
+            <div id="console-input">
+                <span>&gt;</span>
+                <input type="text" id="input-field" autofocus>
+            </div>
+            <div id="console-output"></div>
+        </div>
+    </div>
+    <script src="script.js"></script> <!-- Include your JavaScript file -->
+</body>
+</html>
