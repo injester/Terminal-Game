@@ -1,19 +1,34 @@
 // script.js
 import { fightmonster } from './monsters.js';
+import { fight } from './fight.js';
 
-let hp = 100;
-let money = 0;
-let level = 0;
-let baseDamageModifier = 0;
-let points = 0;
+export let hp = 100;
+export let money = 0;
+export let level = 0.0;
+export let baseDamageModifier = 0;
+export let points = 0;
 
-// Update navbar values
-document.getElementById('hp').textContent = hp;
-document.getElementById('money').textContent = money;
-document.getElementById('level').textContent = level;
+export function updateNavbar() {
+    document.getElementById('battleHP').textContent = hp;
+    document.getElementById('money').textContent = money;
+    document.getElementById('level').textContent = level;
+}
 
-async function main() {
+export function updateStats(newMoney, newLevel) {
+    money = newMoney;
+    level = newLevel
+    updateNavbar();
+}
+
+export function clearConsole() {
+    const consoleOutput = document.getElementById('console-output');
+    consoleOutput.innerHTML = '';
+}
+
+export async function main() {
+    clearConsole()
     writeToConsole("Welcome to the Console Conquest!");
+    document.getElementById('battleHP').textContent = hp;
 
     while (true) {
         const choice = await askQuestion("Enter your choice 'Save' - 'Duel' - 'Shop':");
@@ -23,7 +38,10 @@ async function main() {
                 writeToConsole("Game saved.");
                 break;
             case 'Duel':
-                await fightmonster();
+                await fight();
+                hp -= 10; // Correct syntax for deduction
+                money -= 10;
+                updateNavbar(); // Update the navbar with new values
                 break;
             case 'Shop':
                 // Logic for shop

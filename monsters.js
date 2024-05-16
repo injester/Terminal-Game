@@ -1,44 +1,46 @@
-export async function fightmonster() {
-    let monsterHP = 100;
-    const monsterDamage = Math.floor(Math.random() * 4) + 5; 
+import { hp, money, level, main, updateStats } from './script.js';
 
-    while (hp > 0 && monsterHP > 0) {
-        writeToConsole("╔════════════════════════════════════════════════════════════╗");
-        writeToConsole("║                       BATTLE STARTS!                       ║");
-        writeToConsole("╠════════════════════════════════════════════════════════════╣");
-        writeToConsole("║               🛡️❤️ Battle in Progress ❤️🛡️                 ║");
-        writeToConsole("╠════════════════════════════════════════════════════════════╣");
-        writeToConsole("║                                                            ║");
-        writeToConsole(`║   Your HP: ${hp}                Monster's HP: ${monsterHP}            ║`);
-        writeToConsole("║                                                            ║");
-        writeToConsole("╠════════════════════════════════════════════════════════════╣");
-        writeToConsole("║                                                            ║");
-        writeToConsole("║    Choose your action:                                     ║");
-        writeToConsole("║    1. Run                                                  ║");
-        writeToConsole("║    2. Charge energy                                        ║");
-        writeToConsole("║    3. Fight                                                ║");
-        writeToConsole("║                                                            ║");
-        writeToConsole("╚════════════════════════════════════════════════════════════╝");
+let isCooldown = false;
+
+
+export async function fightmonster() {
+    let batlleHP = hp;
+    let reward = Math.floor(Math.random() * 4) + 5;
+    let xmoney = money + reward
+    let plusXP = 1
+    let xp = level + plusXP
+    let monsterHP = 100;
+    const monsterDamage = Math.floor(Math.random() * 4) + 5;
+    let baseDamageModifier = 0;
+
+    while (batlleHP > 0 && monsterHP > 0) {
+        writeToConsole("╔══════════════════════╗");
+        writeToConsole("    1. Run                                                  ");
+        writeToConsole("    2. Charge energy                                        ");
+        writeToConsole("    3. Fight                                                ");
+        writeToConsole("╚══════════════════════╝");
         let playerAction = await askQuestion('👉 Enter your choice (1-3): ');
 
         switch (playerAction) {
             case '1':
                 writeToConsole('🏃‍♂️ You attempt to run away from the monster.');
                 if (Math.random() < 0.5) {
-                    writeToConsole('🏃‍♂️💨 You successfully escape!');
+                    await main();
                     return;
                 } else {
-                    hp -= monsterDamage;
+                    batlleHP -= monsterDamage;
                     writeToConsole(`💥 The monster attacks you and deals ${monsterDamage} damage.`);
                     writeToConsole('🚫 The monster catches up to you!');
+                    document.getElementById('battleHP').textContent = batlleHP;
                 }
                 break;
             case '2':
                 writeToConsole('🧘‍♂️ You focus your energy, preparing for the next attack.');
-                hp -= monsterDamage;
+                batlleHP -= monsterDamage;
                 writeToConsole(`💥 The monster attacks you and deals ${monsterDamage} damage.`);
                 writeToConsole('🚫 The monster catches up to you!');
                 baseDamageModifier += 15;
+                document.getElementById('battleHP').textContent = batlleHP;
                 break;
             case '3':
                 const playerDamage = Math.floor(Math.random() * 10) + 1 + Math.floor(baseDamageModifier * 0.1);
@@ -46,9 +48,10 @@ export async function fightmonster() {
                 writeToConsole(`⚔️ You attack the monster and deal ${playerDamage} damage.`);
                 if (monsterHP > 0) {
                     writeToConsole(`💥 The monster attacks you and deals ${monsterDamage} damage.`);
-                    hp -= monsterDamage;
-                    writeToConsole(`❤️ Your HP: ${hp}`);
+                    batlleHP -= monsterDamage;
+                    writeToConsole(`❤️ Your HP: ${batlleHP}`);
                     writeToConsole(`🐲 Monster's HP: ${monsterHP}`);
+                    document.getElementById('battleHP').textContent = batlleHP;
                 }
                 break;
             default:
@@ -56,30 +59,25 @@ export async function fightmonster() {
         }
     }
 
-    if (hp > 0) {
-        points += 3;
-        level += 1;
-        writeToConsole("╔════════════════════════════════════════════════╗");
-        writeToConsole("║                    VICTORY!                    ║");
-        writeToConsole("╠════════════════════════════════════════════════╣");
-        writeToConsole("║   🎉 You defeated the monster!                 ║");
-        writeToConsole("║   🏆 You gained 3 points!                      ║");
-        writeToConsole("║                                                ║");
-        writeToConsole(`║   ❤️ Your HP: ${hp}                            ║`);
-        writeToConsole(`║   💰 Points: ${points}                         ║`);
-        writeToConsole("║                                                ║");
-        writeToConsole("╚════════════════════════════════════════════════╝");
-    } else {
-        writeToConsole("╔══════════════════════════════════════════════════════╗");
-        writeToConsole("║                   YOU WERE DEFEATED!                 ║");
-        writeToConsole("╠══════════════════════════════════════════════════════╣");
-        writeToConsole("║   💀 You were defeated by the monster. Game over! 💀  ║");
-        writeToConsole("║                                                      ║");
-        writeToConsole("║   You must rise and try again!                       ║");
-        writeToConsole("║                                                      ║");
-        writeToConsole("╚══════════════════════════════════════════════════════╝");
-    }
+    if (batlleHP > 0) {
+        setTimeout(async () => {
+            updateStats(xmoney, xp)
+            writeToConsole("╔════════════════════════════════════════════════╗");
+            writeToConsole("                    VICTORY!                    ");
+            writeToConsole("╚════════════════════════════════════════════════╝");
+            writeToConsole("╔════════════════════════════════════════════════╗");
+            writeToConsole("                    You earned: " +reward+"💲 & "+xp+"XP");
+            writeToConsole("╚════════════════════════════════════════════════╝");
+        }, 100); // 10 seconds in milliseconds
 
+    } else {
+        setTimeout(async () => {
+            writeToConsole("╔══════════════════════════════════════════════════════╗");
+            writeToConsole("                   YOU WERE DEFEATED!                 ");
+            writeToConsole("╚══════════════════════════════════════════════════════╝");
+        }, 100); // 10 seconds in milliseconds
+    }
+    
     await main();
 }
 

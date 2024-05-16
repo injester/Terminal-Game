@@ -1,4 +1,5 @@
 import { fightmonster } from './monsters.js';
+import { main, clearConsole } from './script.js';
 
 export async function fight() {
     while (true) {
@@ -22,6 +23,7 @@ export async function fight() {
                 }
                 break;
             case '3':
+                await main()
                 return;
             default:
                 writeToConsole('❌ Invalid choice.');
