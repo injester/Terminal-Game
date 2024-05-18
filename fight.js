@@ -1,11 +1,11 @@
-import { fightmonster } from './monsters.js';
-import { main } from './script.js';
+import { fightMonster, fightVlad } from './monsters.js';
+import { main, clearConsole, level } from './script.js';
 
 export async function fight() {
     while (true) {
         writeToConsole("╔════════════════════╗");
         writeToConsole("1. Fight monster");
-        writeToConsole("2. Fight mambo (lvl. 50)");
+        writeToConsole("2. Fight Vlad The Impaler (lvl. 50)");
         writeToConsole("3. Back to home");
         writeToConsole("╚════════════════════╝");
 
@@ -13,11 +13,13 @@ export async function fight() {
 
         switch (choice) {
             case '1':
-                await fightmonster();
+                clearConsole();
+                await fightMonster();
                 break;
             case '2':
-                if (level >= 50) {
-                    await fightmambo();
+                if (level >= 10) {
+                    clearConsole();
+                    await fightVlad();
                 } else {
                     writeToConsole('❌ You do not have enough levels to fight Mambo.');
                 }

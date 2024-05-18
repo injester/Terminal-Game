@@ -1,21 +1,48 @@
 // script.js
 import { fight } from './fight.js';
-
+import { shop } from './shop.js';
 export let hp = 100;
-export let money = 0;
-export let level = 0.0;
-export let baseDamageModifier = 0;
+export let money = 300;
+export let XPbase = 0;
+export let baseDamage = 5;
 export let points = 0;
+export let level = 1;
+export let requirement = 100;
+export let baseHP = 100;
 
 export function updateNavbar() {
     document.getElementById('battleHP').textContent = hp;
+    document.getElementById('baseHP').textContent = baseHP;
     document.getElementById('money').textContent = money;
-    document.getElementById('level').textContent = level;
+    document.getElementById('xp').textContent = XPbase; // Corrected xp to XPbase
+    document.getElementById('dmg').textContent = baseDamage;
+    document.getElementById('lvl').textContent = level;
+    document.getElementById('req').textContent = requirement;
 }
 
-export function updateStats(newMoney, newLevel) {
+export function Buy(newMoney, newHP, newbaseHP, newbaseDamage){
+    money = newMoney
+    hp = newHP
+    baseHP = newbaseHP
+    baseDamage = newbaseDamage
+}
+
+export function updateStats(newMoney, newXP, newDamage, newHP) {
     money = newMoney;
-    level = newLevel;
+    XPbase = newXP;
+    baseDamage = newDamage;
+    hp = newHP;
+    if (XPbase >= requirement){
+        setTimeout(async () => {
+            baseDamage += baseDamage * 0.2; // Corrected increment logic
+            baseHP += 5; // Corrected increment logic
+            XPbase = XPbase - requirement;
+            level = level + 1;
+            requirement = requirement / 100 * 220;
+            writeToConsole("Congratulations you just leveled up!");
+            updateNavbar(); // Ensure the navbar updates after leveling up
+        }, 75);
+    }
     updateNavbar();
 }
 
@@ -26,8 +53,8 @@ export function clearConsole() {
 
 export async function main() {
     clearConsole();
+    updateNavbar();
     writeToConsole("Welcome to the Console Conquest!");
-    document.getElementById('battleHP').textContent = hp;
 
     while (true) {
         const choice = (await askQuestion("Enter your choice 'Save' - 'Duel' - 'Shop':")).toLowerCase(); // Convert choice to lower case
@@ -39,13 +66,11 @@ export async function main() {
                 break;
             case 'duel':
                 await fight();
-                hp -= 10; // Correct syntax for deduction
-                money -= 10;
                 updateNavbar(); // Update the navbar with new values
                 break;
             case 'shop':
                 // Logic for shop
-                writeToConsole("Welcome to the shop.");
+                await shop();
                 break;
             case 'help':
                 writeToConsole("Available commands: Save, Duel, Shop, Help");

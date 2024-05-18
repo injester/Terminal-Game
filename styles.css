@@ -27,17 +27,23 @@ body {
 
 /* Style for the level */
 .navbar-left {
-    width: 100%; /* Takes up equal space */
+    width: 120%; /* Takes up equal space */
 }
-
 /* Style for the HP */
 .navbar-center {
-    width: 100%; /* Takes up equal space */
+    width: 120%; /* Takes up equal space */
 }
-
 /* Style for the Money */
 .navbar-right {
-    width: 1200%; /* Adjust width as needed */
+    width: 100%; /* Adjust width as needed */
+}
+/* Style for the lvl */
+.navbar-level {
+    width: 100%; /* Takes up equal space */
+}
+/* Style for the Money */
+.navbar-dmg {
+    width: 1300%; /* Adjust width as needed */
 }
 
 
