@@ -1,5 +1,5 @@
 import { fightmonster } from './monsters.js';
-import { main, clearConsole } from './script.js';
+import { main } from './script.js';
 
 export async function fight() {
     while (true) {

@@ -1,8 +1,5 @@
 import { hp, money, level, main, updateStats } from './script.js';
 
-let isCooldown = false;
-
-
 export async function fightmonster() {
     let batlleHP = hp;
     let reward = Math.floor(Math.random() * 4) + 5;
@@ -19,6 +16,7 @@ export async function fightmonster() {
         writeToConsole("    2. Charge energy                                        ");
         writeToConsole("    3. Fight                                                ");
         writeToConsole("╚══════════════════════╝");
+        writeToConsole(`🐲 Monster's HP: ${monsterHP}`);
         let playerAction = await askQuestion('👉 Enter your choice (1-3): ');
 
         switch (playerAction) {

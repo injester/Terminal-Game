@@ -1,5 +1,4 @@
 // script.js
-import { fightmonster } from './monsters.js';
 import { fight } from './fight.js';
 
 export let hp = 100;
@@ -16,7 +15,7 @@ export function updateNavbar() {
 
 export function updateStats(newMoney, newLevel) {
     money = newMoney;
-    level = newLevel
+    level = newLevel;
     updateNavbar();
 }
 
@@ -26,28 +25,29 @@ export function clearConsole() {
 }
 
 export async function main() {
-    clearConsole()
+    clearConsole();
     writeToConsole("Welcome to the Console Conquest!");
     document.getElementById('battleHP').textContent = hp;
 
     while (true) {
-        const choice = await askQuestion("Enter your choice 'Save' - 'Duel' - 'Shop':");
+        const choice = (await askQuestion("Enter your choice 'Save' - 'Duel' - 'Shop':")).toLowerCase(); // Convert choice to lower case
+        
         switch (choice) {
-            case 'Save':
+            case 'save':
                 // Logic for saving the game
                 writeToConsole("Game saved.");
                 break;
-            case 'Duel':
+            case 'duel':
                 await fight();
                 hp -= 10; // Correct syntax for deduction
                 money -= 10;
                 updateNavbar(); // Update the navbar with new values
                 break;
-            case 'Shop':
+            case 'shop':
                 // Logic for shop
                 writeToConsole("Welcome to the shop.");
                 break;
-            case 'Help':
+            case 'help':
                 writeToConsole("Available commands: Save, Duel, Shop, Help");
                 break;
             default:
